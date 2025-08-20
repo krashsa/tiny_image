@@ -7,8 +7,7 @@ golang 1.24
 FROM golang:1.24-alpine AS builder
 RUN apk add --no-cache upx
 WORKDIR /app
-COPY main.go .
-COPY go.mod .
+COPY main.go go.mod .
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o app . \
     && upx --best --lzma app
 
